@@ -19,6 +19,16 @@ src="https://www.facebook.com/tr?id=2864880907244140&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+  ttq.load('DAV8PV3C77U5PB60IKFG');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ramax | حقيبة رجالية عملية وأنيقة</title>
 <meta name="description" content="Ramax حقيبة رجالية بسعر 2300 دج. التوصيل 400 دج، وعند طلب قطعتين التوصيل مجاني.">
@@ -61,7 +71,8 @@ function money(n){return n.toLocaleString('en-US')+' دج'}
 function refresh(){const q=+qty.value,d=q>=2?0:DELIVERY;document.getElementById('sumQty').textContent=q;document.getElementById('sumDelivery').textContent=d?money(d):'مجاني';document.getElementById('sumTotal').textContent=money(PRICE*q+d)}qty.addEventListener('change',refresh);refresh();
 form.addEventListener('submit',async e=>{e.preventDefault();const btn=document.getElementById('submitBtn');btn.disabled=true;btn.textContent='جاري تأكيد الطلب…';const fd=new FormData(form),q=+fd.get('qty'),delivery=q>=2?0:DELIVERY,total=PRICE*q+delivery;const order={product:'Ramax',name:fd.get('name'),phone:fd.get('phone'),wilaya:fd.get('wilaya'),address:fd.get('address'),color:fd.get('color'),qty:q,unitPrice:PRICE,delivery,total,note:fd.get('note')||'',createdAt:new Date().toISOString()};
 if(typeof fbq==='function'){fbq('track','InitiateCheckout',{value:total,currency:'DZD',content_name:'Ramax',content_category:'Men Bag',num_items:q});}
-try{if(!CLOUDFLARE_WORKER_URL.startsWith('http'))throw new Error('Worker URL not configured');const r=await fetch(CLOUDFLARE_WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(order)});if(!r.ok)throw new Error('Worker error');if(typeof fbq==='function'){fbq('track','Lead',{value:total,currency:'DZD',content_name:'Ramax',content_category:'Men Bag'});}}catch(err){console.warn(err);}
+if(typeof ttq!=='undefined' && typeof ttq.track==='function'){ttq.track('InitiateCheckout',{value:total,currency:'DZD',content_type:'product',content_id:'ramax-bag',content_name:'Ramax',quantity:q});}
+try{if(!CLOUDFLARE_WORKER_URL.startsWith('http'))throw new Error('Worker URL not configured');const r=await fetch(CLOUDFLARE_WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(order)});if(!r.ok)throw new Error('Worker error');if(typeof fbq==='function'){fbq('track','Lead',{value:total,currency:'DZD',content_name:'Ramax',content_category:'Men Bag'});if(typeof ttq!=='undefined' && typeof ttq.track==='function'){ttq.track('SubmitForm',{value:total,currency:'DZD',content_type:'product',content_id:'ramax-bag',content_name:'Ramax',quantity:q});}}}catch(err){console.warn(err);}
 const msg=`طلب جديد - Ramax\nالاسم: ${order.name}\nالهاتف: ${order.phone}\nالولاية: ${order.wilaya}\nالعنوان: ${order.address}\nاللون: ${order.color}\nالكمية: ${order.qty}\nسعر المنتج: ${money(PRICE*order.qty)}\nالتوصيل: ${delivery?money(delivery):'مجاني'}\nالإجمالي: ${money(total)}${order.note?'\nملاحظة: '+order.note:''}`;
 document.getElementById('status').style.display='block';btn.textContent='تم التأكيد ✓';window.location.href=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;setTimeout(()=>{btn.disabled=false;btn.textContent='تأكيد الطلب عبر واتساب'},2500)});
 </script></body></html>
